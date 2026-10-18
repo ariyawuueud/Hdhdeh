@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kPLbx8Rx71m+sPbnFmW+AcrsgcSBKWFaR5SdjrKai8I=' 'sha256-BiOnIByO3+KVjILZCiJxj4+WDxqaMMOJtyxDiWmy5/k='; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; connect-src 'self' https://yeijtmqejujiypcarafs.supabase.co; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kPLbx8Rx71m+sPbnFmW+AcrsgcSBKWFaR5SdjrKai8I=' 'sha256-j3teOjLakQOsUoyg1Z4dAxYT3rzEwKQMWVoIa7J3OXg='; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; connect-src 'self' https://yeijtmqejujiypcarafs.supabase.co; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>۱۵۳</title>
@@ -164,14 +164,14 @@ button{touch-action:manipulation}
  </div>
  <div class="tiles">
   <button class="glass tile" id="tMsg"><div class="ic">💬</div>پیام‌رسان<em id="roleLbl"></em></button>
-  <button class="glass tile" id="tCm"><div class="ic">📝</div>نظرات<em>پیشنهاد و انتقاد</em></button>
+  <button class="glass tile soon" id="tCm"><div class="ic">📝</div>نظرات<em>پیشنهاد و انتقاد</em></button>
   <button class="glass tile sm" id="tTk"><div class="ic">✅</div>وظایف<em>مهلت و یادآور</em></button><button class="glass tile sm" id="tRp"><div class="ic">📈</div>گزارش‌ها<em>آمار و تأییدها</em></button><button class="glass tile sm" id="tMb" hidden><div class="ic">👥</div>اعضا و کد معرف<em>صدور کد ورود برای افراد جدید</em></button>
  </div>
 </section>
 
 <!-- پیام‌رسان -->
 <section class="screen" id="msgr">
- <div class="bar"><button class="glass ibtn" data-back="msgr">→</button><h2>پیام‌رسان</h2><span class="tag" id="rtag"></span><button class="glass ibtn" id="dmb">👤</button></div>
+ <div class="bar"><button class="glass ibtn" data-back="msgr">→</button><h2>پیام‌رسان</h2><span class="tag" id="rtag"></span></div>
  <input id="q" placeholder="🔍 جستجو..." style="margin:0 0 12px;text-align:right">
  <div class="list" id="list"></div>
  <button class="fab" id="fab" hidden>＋</button>
@@ -397,15 +397,10 @@ $('#info').onclick=()=>{const c=C[cur];let h=`<h3>${esc(c.n)}</h3><p class="sub"
 $$('[data-mk]').forEach(b=>b.onclick=()=>{const n=$('#mkn').value.trim();if(!n)return;const c=mkc(n,b.dataset.mk,[]);c.m.push({i:uid(),w:'him',k:'t',x:'«'+n+'» ساخته شد.',tm:hm(),nm:''});C.unshift(c);sv();$('#mkn').value='';$('#mk').classList.remove('on');renderList()});
 
 const svc=sv;
-const rc=async()=>{if(CFG.url){try{CM=await rpc('cm_list')}catch(e){toast('اتصال به سرور برقرار نیست')}}$('#cl').innerHTML=CM.map((c,i)=>`<div class="glass cmi"><span class="tag">${c.k}</span> <small>${c.a?'ناشناس':c.r}</small><p style="margin:6px 0">${esc(c.t)}</p>${c.rp?`<p style="color:var(--ac)">↩️ پاسخ ستاد کل: ${esc(c.rp)}</p>`:role==='cmd'?`<button class="chip" data-rc="${i}">پاسخ</button>`:''}</div>`).join('<div style="height:8px"></div>')||'<p class="sub" style="text-align:center">هنوز نظری ثبت نشده</p>'};
-$('#cs').onclick=async()=>{const t=$('#ct').value.trim();if(!t)return;if(CFG.url){try{await rpc('cm_send',{id:uid(),k:$('#ck').value,t,a:$('#can').checked})}catch(e){toast('ارسال نشد');return}}else{CM.unshift({k:$('#ck').value,t,a:$('#can').checked,r:role==='cmd'?'ستاد کل':'نیرو'});svc()}$('#ct').value='';rc();toast('نظر شما ثبت شد ✅')};
-$('#cl').onclick=e=>{const b=e.target.closest('[data-rc]');if(!b)return;gs('<h3>پاسخ</h3><input id="rx2" placeholder="متن پاسخ"><button class="pri" id="rg">ارسال</button>');$('#rg').onclick=async()=>{const v=$('#rx2').value.trim();if(CFG.url){try{await rpc('cm_reply',{id:CM[b.dataset.rc].id,t:v})}catch(e){toast('ارسال نشد');return}}else{CM[b.dataset.rc].rp=v;svc()}gx();rc()}};
+const rc=()=>{$('#cl').innerHTML=CM.map((c,i)=>`<div class="glass cmi"><span class="tag">${c.k}</span> <small>${c.a?'ناشناس':c.r}</small><p style="margin:6px 0">${esc(c.t)}</p>${c.rp?`<p style="color:var(--ac)">↩️ پاسخ ستاد کل: ${esc(c.rp)}</p>`:role==='cmd'?`<button class="chip" data-rc="${i}">پاسخ</button>`:''}</div>`).join('<div style="height:8px"></div>')||'<p class="sub" style="text-align:center">هنوز نظری ثبت نشده</p>'};
+$('#cs').onclick=()=>{const t=$('#ct').value.trim();if(!t)return;CM.unshift({k:$('#ck').value,t,a:$('#can').checked,r:role==='cmd'?'ستاد کل':'نیرو'});svc();$('#ct').value='';rc();toast('نظر شما ثبت شد ✅')};
+$('#cl').onclick=e=>{const b=e.target.closest('[data-rc]');if(!b)return;gs('<h3>پاسخ</h3><input id="rx2" placeholder="متن پاسخ"><button class="pri" id="rg">ارسال</button>');$('#rg').onclick=()=>{CM[b.dataset.rc].rp=$('#rx2').value.trim();svc();gx();rc()}};
 $('#tCm').onclick=e=>{rc();open('cm',e.currentTarget)};
-$('#dmb').onclick=async()=>{if(!CFG.url){toast('این بخش به اتصال سرور نیاز دارد');return}let h='';try{h=await rpc('my_handle')||''}catch(e){}
-gs('<h3>گفتگوی خصوصی</h3><small>شناسه‌ی من: <b id="mh">'+(h?'@'+esc(h):'تنظیم نشده')+'</b></small><input id="hn" dir="ltr" placeholder="شناسه‌ی من (انگلیسی/عدد/_ ، ۳ تا ۲۰ نویسه)"><button class="pri" id="hs">ذخیره شناسه</button><input id="hf" dir="ltr" placeholder="شناسه‌ی نیروی مقابل"><button class="pri" id="hg">شروع گفتگو</button>');
-$('#hs').onclick=async()=>{try{const v=$('#hn').value.trim().replace(/^@/,'').toLowerCase();await rpc('set_handle',{h:v});$('#mh').textContent='@'+v;toast('شناسه ذخیره شد ✅')}catch(e){toast(e.message==='taken'?'این شناسه قبلاً گرفته شده':'شناسه نامعتبر است')}};
-$('#hg').onclick=async()=>{try{const v=$('#hf').value.trim().replace(/^@/,'').toLowerCase();await rpc('dm',{id:uid(),h:v});tc=0;await syncAll();gx();renderList();toast('گفتگو آماده است ✅')}catch(e){toast(e.message==='no_user'?'کاربری با این شناسه نیست':e.message==='self'?'این شناسه‌ی خودت است':'انجام نشد')}}};
-
 
 function applyS(){const r=document.documentElement.style,a=AC[S.acc||0];r.setProperty('--ac',a[0]);r.setProperty('--ac2',a[1]);r.setProperty('--me',`linear-gradient(135deg,${a[0]},${a[1]})`);$('#msgs').dataset.w=S.wall||0}
 $('#gear').onclick=()=>{const T=k=>`<button class="chip" data-s="${k}">${S[k]?'روشن':'خاموش'}</button>`;
@@ -432,4 +427,17 @@ let it;function idle(){clearTimeout(it);if(S.al&&role&&S.ph)it=setTimeout(()=>{r
 applyS();
 setInterval(()=>{if(!ready)return;const t=Date.now();let ch=0;C.forEach(c=>{const n=c.m.length;c.m=c.m.filter(m=>!m.ex||m.ex>t);if(c.m.length!==n)ch=1});if(ch){sv();if(cur!==null&&$('#room').classList.contains('on')){const e=$('#msgs');renderMsgs(C[cur]);pinUI()}}},1000);
 $('#srch').onclick=()=>{const r=$('#rs');r.hidden=!r.hidden;if(!r.hidden)r.focus();else{r.value='';r.oninput()}};
-$('#rs').oninput=()=>{const q=$('#rs').value.trim();$$('#msgs .m').forEach(e=>e.hidden=
+$('#rs').oninput=()=>{const q=$('#rs').value.trim();$$('#msgs .m').forEach(e=>e.hidden=!!q&&!e.textContent.includes(q))};
+$('#room [data-back=room]').addEventListener('click',()=>{if(cur!==null&&!ed){C[cur].dr=$('#txt').value;sv()}});
+let hid=0;document.addEventListener('visibilitychange',()=>{document.body.style.filter=document.hidden?'blur(24px)':'';if(document.hidden)hid=Date.now();else if(S.ph&&Date.now()-hid>3e4)lk.classList.add('on')});
+
+/* ===== افزونه‌ها ===== */
+const CFG={url:'https://yeijtmqejujiypcarafs.supabase.co',key:'sb_publishable_mRxEvb4TDNtMlYzgBgq6aA_rh7ow6xg'}; // ← آدرس و کلید سرور (با build153.py پر کن)
+const now=()=>Date.now(),jd=t=>new Intl.DateTimeFormat('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t);
+function mn(h){return h.replace(/(^|[\s>])@([^\s@<]+)/g,'$1<span class="mn">@$2</span>')}
+function anH(m){const c=C[cur],tot=Math.max(c.mem.length,1),k=m.ak||[];let h='<b>📢 اعلان رسمی</b><br>'+mn(fmt(m.x));
+ if(m.w==='me')h+=`<button class="akb" data-ak="${m.i}">✅ ${fa(k.length)} از ${fa(tot)} تأیید کرده‌اند</button>`;
+ else h+=k.includes('شما')?'<div class="akd">✔ دریافت شد</div>':`<button class="akb" data-ack="${m.i}">✅ دریافت شد (الزامی)</button>`;return h}
+const ab=document.createElement('button');ab.className=$('#sosb').className;ab.textContent='📢';ab.hidden=true;$('#sosb').before(ab);
+const _or=window.openRoom;window.openRoom=function(i,el){const c=C[i];shown=40;
+ if(!CFG.url&&role!=='cmd'&&c.t==='کانال'&&!c.m.some(x=>x.k==='a'&&x.w==='him')
