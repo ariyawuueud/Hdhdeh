@@ -1,5 +1,5 @@
 // ۱۵۳ — سرویس‌ورکر با آپدیت خودکار: همیشه اول از شبکه می‌خواند، فقط وقتی آفلاین است از کش.
-const CACHE='c153-v12';
+const CACHE='c153-v14';
 self.addEventListener('install',e=>{self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const ks=await caches.keys();
